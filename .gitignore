@@ -5,3 +5,4 @@ dist
 ./media
 .vscode
 service-account.json
+.DS_store

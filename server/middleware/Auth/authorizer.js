@@ -1,9 +1,3 @@
-const { compareSync } = require("bcrypt");
-const { checkPermission } = require("../../utils/common");
-const {
-  getBasicTokenByClientId,
-  getUserDetailsById,
-} = require("../../services/userService/user.helper");
 const authorizer = async (req, res, next) => {
   try {
     const authToken = req.headers.Authorization || req.headers.authorization;
@@ -34,7 +28,7 @@ const handleAuthRoutes = async ({ token, req, res, next }) => {
     const decodedToken = Buffer.from(token, "base64").toString();
     const usernamePassword = decodedToken.split(":");
     if (usernamePassword.length !== 2) throw Error("unauthorized");
-    const client = { secret: "1234567890" };
+    const client = { secret: "123456789" };
     if (!client) {
       return res.status(401).json({
         message: "Unauthorized",
