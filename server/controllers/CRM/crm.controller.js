@@ -1,11 +1,11 @@
-const create = async (req, res, next) => {
+const crmService = require("../../services/crm.service");
+
+const getAccounts = async (req, res, next) => {
   try {
-    console.log(req.body);
-    return res.status(200).json({
-      message: "created user",
-    });
+    const data = await crmService.getAccounts();
+    return res.status(200).json(data);
   } catch (error) {
     next(error);
   }
 };
-module.exports = { create };
+module.exports = { getAccounts };

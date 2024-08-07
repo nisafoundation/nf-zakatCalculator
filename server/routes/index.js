@@ -6,10 +6,10 @@ const { createCRMAccountValidator } = require("../utils/validators/validator");
 const router = require("express").Router();
 router.get("/prices", authorizer, getPrices);
 router.post(
-  "/create-crm",
+  "/get-accounts",
   authorizer,
   createCRMAccountValidator,
-  crmController.create
+  crmController.getAccounts
 );
 
 module.exports = router;
