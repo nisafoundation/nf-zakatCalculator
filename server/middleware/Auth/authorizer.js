@@ -9,7 +9,8 @@ const authorizer = async (req, res, next) => {
     if (token[0].trim() === "Basic") {
       if (
         req.originalUrl.includes("/api/prices") ||
-        req.originalUrl.includes("/api/get-accounts")
+        req.originalUrl.includes("/api/get-contacts") ||
+        req.originalUrl.includes("/api/create-contact")
       )
         return await handleAuthRoutes({
           token: token[1].trim(),

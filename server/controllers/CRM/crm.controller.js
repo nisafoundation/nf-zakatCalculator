@@ -1,11 +1,32 @@
 const crmService = require("../../services/crm.service");
 
-const getAccounts = async (req, res, next) => {
+const getContacts = async (req, res, next) => {
   try {
-    const data = await crmService.getAccounts();
+    const data = await crmService.getContacts();
     return res.status(200).json(data);
   } catch (error) {
     next(error);
   }
 };
-module.exports = { getAccounts };
+const createContact = async (req, res, next) => {
+  try {
+    const { langArabic, langEnglish, langFrench, langSomali, langOther } =
+      req.body;
+    let languages = [];
+
+    if (!(langArabic || langEnglish || langFrench || langSomali || langOther)) {
+      return res.status(400).json({
+        error: "BadRequest",
+        message:
+          "Request body validation failed: data should have any of language property",
+      });
+    }
+    const data = await crmService.createContact(req.body);
+
+    return res.status(200).json(data);
+  } catch (error) {
+    console.log(error?.response?.data);
+    next(error);
+  }
+};
+module.exports = { getContacts, createContact };
