@@ -12,7 +12,6 @@ const createContact = async (req, res, next) => {
   try {
     const { langArabic, langEnglish, langFrench, langSomali, langOther } =
       req.body;
-    let languages = [];
 
     if (!(langArabic || langEnglish || langFrench || langSomali || langOther)) {
       return res.status(400).json({
@@ -21,9 +20,8 @@ const createContact = async (req, res, next) => {
           "Request body validation failed: data should have any of language property",
       });
     }
-    const data = await crmService.createContact(req.body);
-
-    return res.status(200).json(data);
+    await crmService.createContact(req.body);
+    return res.status(201).json({ message: "Apply Form Submitted" });
   } catch (error) {
     console.log(error?.response?.data);
     next(error);
