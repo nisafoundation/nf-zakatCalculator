@@ -23,7 +23,6 @@ const createContact = async (req, res, next) => {
           "Request body validation failed: data should have any of language property",
       });
     }
-    console.log(req.body);
     // await crmService.createContact(req.body);
     return res.status(201).json({ message: "Apply Form Submitted" });
   } catch (error) {
