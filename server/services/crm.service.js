@@ -100,6 +100,7 @@ const createContactObject = (request) => {
   contact["familystatuscode"] = request.Radio1;
   contact["haschildrencode"] = request.Radio2;
   contact["dcg_childreninformation"] = request.MultiLine2;
+  contact["radioLocation"] = request.location;
 
   return contact;
 };
