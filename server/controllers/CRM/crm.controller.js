@@ -26,6 +26,7 @@ const createContact = async (req, res, next) => {
     await crmService.createContact(req.body);
     return res.status(201).json({ message: "Apply Form Submitted" });
   } catch (error) {
+    // console.log(error);
     console.log(error?.response?.data);
     next(error);
   }

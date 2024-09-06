@@ -59,6 +59,7 @@ const getContactByEmail = async (email, token) => {
       Authorization: `Bearer ${token}`,
     },
   };
+
   return await new Promise((resolve, reject) => {
     axios
       .request(config)
@@ -100,8 +101,7 @@ const createContactObject = (request) => {
   contact["familystatuscode"] = request.Radio1;
   contact["haschildrencode"] = request.Radio2;
   contact["dcg_childreninformation"] = request.MultiLine2;
-  contact["radioLocation"] = request.location;
-
+  delete request.location;
   return contact;
 };
 const createCaseObject = (request) => {
@@ -111,6 +111,7 @@ const createCaseObject = (request) => {
   caseData["caseorigincode"] = "3";
   caseData["casetypecode"] = request.Radio3;
   caseData["description"] = request.MultiLine3;
+  caseData["dcg_location"] = request.location;
 
   if (request.CheckboxFriends) sources.push("804920000");
   if (request.CheckboxFacebook) sources.push("804920001");
@@ -137,7 +138,7 @@ const createContact = async (data) => {
   const token_response = await getAccessToken();
   const contact = createContactObject(data);
   const caseData = createCaseObject(data);
-
+  delete data.location;
   let config = {
     method: "post",
     maxBodyLength: Infinity,
