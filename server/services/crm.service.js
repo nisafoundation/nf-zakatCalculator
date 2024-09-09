@@ -134,7 +134,7 @@ const createCaseObject = (request) => {
 
   return caseData;
 };
-const createContact = async (data, res) => {
+const createContact = async (data) => {
   const token_response = await getAccessToken();
   const contact = createContactObject(data);
   const caseData = createCaseObject(data);
@@ -156,7 +156,6 @@ const createContact = async (data, res) => {
           data.Email,
           token_response.access_token
         );
-        res.status(201).json({ message: "Apply Form Submitted" });
         console.log({
           ...caseData,
           "customerid_contact@odata.bind": `/contacts(${contactid})`,
