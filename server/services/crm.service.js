@@ -172,6 +172,7 @@ const createContact = async (data) => {
             "customerid_contact@odata.bind": `/contacts(${contactid})`,
           },
         };
+
         try {
           const { data } = await axios.request(config);
           console.log("created case==>", data);
