@@ -175,7 +175,6 @@ const createContact = async (data) => {
 
         try {
           const { data } = await axios.request(config);
-          console.log("created case==>", data);
           resolve(data);
         } catch (err) {
           reject(err);
