@@ -6,11 +6,7 @@ app.use(require("morgan")("dev"));
 app.use(express.urlencoded({ extended: true }));
 const cors = require("cors");
 
-app.use(
-  cors({
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  })
-);
+app.use(cors());
 const { json, urlencoded } = require("body-parser");
 
 app.options("*", cors());
