@@ -1,3 +1,4 @@
+const { default: axios } = require("axios");
 const crmService = require("../../services/crm.service");
 
 const getContacts = async (req, res, next) => {
@@ -10,20 +11,36 @@ const getContacts = async (req, res, next) => {
 };
 const createContact = async (req, res, next) => {
   try {
-    if (typeof req?.body?.languages == "string") {
-      req.body[req?.body?.languages] = true;
-    }
-    const { langArabic, langEnglish, langFrench, langSomali, langOther } =
-      req.body;
+    // if (typeof req?.body?.languages == "string") {
+    //   req.body[req?.body?.languages] = true;
+    // }
+    // const { langArabic, langEnglish, langFrench, langSomali, langOther } =
+    //   req.body;
 
-    if (!(langArabic || langEnglish || langFrench || langSomali || langOther)) {
-      return res.status(400).json({
-        error: "BadRequest",
-        message:
-          "Request body validation failed: data should have any of language property",
+    // if (!(langArabic || langEnglish || langFrench || langSomali || langOther)) {
+    //   return res.status(400).json({
+    //     error: "BadRequest",
+    //     message:
+    //       "Request body validation failed: data should have any of language property",
+    //   });
+    // }
+    try {
+      await axios.request({
+        method: "post",
+        maxBodyLength: Infinity,
+        url: `${process.env.PROXY_BASE}api/create-contact`,
+        headers: {
+          Authorization:
+            req?.headers?.authorization || req?.headers?.authorization,
+          "Content-Type": "application/json",
+        },
+        data: {
+          ...req.body,
+        },
       });
+    } catch (error) {
+      console.log(error?.response);
     }
-    crmService.createContact(req.body);
     return res.status(201).json({ message: "Apply Form Submitted" });
   } catch (error) {
     // console.log(error);
