@@ -173,16 +173,17 @@ const createContact = async (data) => {
           },
         };
 
-        try {
-          console.log("case request sent");
-          axios.request(config).then((response) => {
+        console.log("case request sent");
+        axios
+          .request(config)
+          .then((response) => {
             console.log("case request successful");
             resolve(response.data);
+          })
+          .catch((error) => {
+            console.log("case request failed");
+            reject(error);
           });
-        } catch (err) {
-          console.log("case request failed");
-          reject(err);
-        }
       })
       .catch((error) => {
         reject(error);
